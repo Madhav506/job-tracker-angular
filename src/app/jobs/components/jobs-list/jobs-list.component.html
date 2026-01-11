@@ -1,0 +1,17 @@
+<div class="jobs-grid">
+  @for (job of jobs; track job.id) {
+  <div class="job-card">
+    <h3>{{ job.title }}</h3>
+    <p>{{ job.company }}</p>
+    <p>{{ job.location }}</p>
+    <p>{{ job.status }}</p>
+
+    <p class="date">Applied on: {{ job.dateApplied | date : "mediumDate" }}</p>
+
+    <div class="actions">
+      <button (click)="edit.emit(job)">Edit</button>
+      <button class="danger" (click)="delete.emit(job.id)">Delete</button>
+    </div>
+  </div>
+  }
+</div>

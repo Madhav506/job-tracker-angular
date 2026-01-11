@@ -1,0 +1,106 @@
+/* ===== Form Container ===== */
+form {
+  max-width: 520px;
+  margin: 24px auto;
+  padding: 24px;
+  background: var(--bg);
+  border-radius: var(--radius);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* ===== Field Wrapper ===== */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+/* ===== Labels ===== */
+label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+/* ===== Inputs & Selects ===== */
+input,
+select {
+  padding: 10px 12px;
+  font-size: 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: #fff;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+/* Hover */
+input:hover,
+select:hover {
+  border-color: var(--primary);
+}
+
+/* Focus (Keyboard-friendly) */
+input:focus-visible,
+select:focus-visible {
+  outline: none;
+  border-color: var(--focus);
+  box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.15);
+}
+
+/* Invalid */
+input[aria-invalid="true"],
+select[aria-invalid="true"] {
+  border-color: var(--danger);
+}
+
+/* ===== Error Text ===== */
+.error {
+  margin-top: 4px;
+  color: var(--danger);
+  font-size: 0.85rem;
+}
+
+/* ===== Submit Button ===== */
+button[type="submit"] {
+  margin-top: 12px;
+  padding: 12px;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--primary);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s, box-shadow 0.1s;
+}
+
+/* Hover */
+button:hover:not(:disabled) {
+  background: #303f9f;
+  box-shadow: 0 4px 12px rgba(63, 81, 181, 0.3);
+}
+
+/* Active */
+button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+/* Disabled */
+button:disabled {
+  background: #c5cae9;
+  cursor: not-allowed;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  form {
+    margin: 12px;
+    padding: 16px;
+  }
+
+  input,
+  select,
+  button {
+    font-size: 16px; // better mobile tap targets
+  }
+}

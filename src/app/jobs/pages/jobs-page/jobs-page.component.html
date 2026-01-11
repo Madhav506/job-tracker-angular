@@ -1,0 +1,14 @@
+<div class="container">
+  <h2>Jobs List</h2>
+  <app-job-form
+    [jobToEdit]="jobBeingEdited"
+    (jobSaved)="saveJob($event)"
+  ></app-job-form>
+  <hr />
+  <app-jobs-list
+    [jobs]="jobs"
+    (edit)="editJob($event)"
+    (delete)="deleteJob($event)"
+  >
+  </app-jobs-list>
+</div>

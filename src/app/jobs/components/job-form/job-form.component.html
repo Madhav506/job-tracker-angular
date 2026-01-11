@@ -1,0 +1,121 @@
+<form [formGroup]="jobForm" (ngSubmit)="submit()" novalidate>
+  <!-- TITLE -->
+  <div class="form-group">
+    <label for="title">Job Title</label>
+    <input
+      id="title"
+      type="text"
+      formControlName="title"
+      aria-required="true"
+      [attr.aria-invalid]="
+        jobForm.get('title')?.touched && jobForm.get('title')?.invalid
+      "
+      aria-describedby="title-error"
+    />
+
+    @if (jobForm.get('title')?.touched && jobForm.get('title')?.invalid) {
+    <div id="title-error" class="error" role="alert" aria-live="assertive">
+      @if (jobForm.get('title')?.errors?.['required']) {
+      <small>Job title is required.</small>
+      } @if (jobForm.get('title')?.errors?.['minlength']) {
+      <small>Must be at least 2 characters.</small>
+      } @if (jobForm.get('title')?.errors?.['pattern']) {
+      <small>Only letters and spaces allowed.</small>
+      }
+    </div>
+    }
+  </div>
+
+  <!-- COMPANY -->
+  <div class="form-group">
+    <label for="company">Company</label>
+    <input
+      id="company"
+      type="text"
+      formControlName="company"
+      aria-required="true"
+      [attr.aria-invalid]="
+        jobForm.get('company')?.touched && jobForm.get('company')?.invalid
+      "
+      aria-describedby="company-error"
+    />
+
+    @if (jobForm.get('company')?.touched && jobForm.get('company')?.invalid) {
+    <div id="company-error" class="error" role="alert">
+      <small>Valid company name required.</small>
+    </div>
+    }
+  </div>
+
+  <!-- LOCATION -->
+  <div class="form-group">
+    <label for="location">Location</label>
+    <input
+      id="location"
+      type="text"
+      formControlName="location"
+      aria-required="true"
+      [attr.aria-invalid]="
+        jobForm.get('location')?.touched && jobForm.get('location')?.invalid
+      "
+      aria-describedby="location-error"
+    />
+
+    @if (jobForm.get('location')?.touched && jobForm.get('location')?.invalid) {
+    <div id="location-error" class="error" role="alert">
+      <small>Enter a valid location.</small>
+    </div>
+    }
+  </div>
+
+  <!-- DATE -->
+  <div class="form-group">
+    <label for="dateApplied">Date Applied</label>
+
+    <input
+      id="dateApplied"
+      type="date"
+      formControlName="dateApplied"
+      [max]="today"
+      aria-describedby="dateAppliedError"
+      aria-invalid="jobForm.get('dateApplied')?.invalid"
+    />
+
+    @if (jobForm.get('dateApplied')?.touched &&
+    jobForm.get('dateApplied')?.invalid) {
+    <small id="dateAppliedError" class="error" role="alert">
+      @if (jobForm.get('dateApplied')?.errors?.['required']) { Date is required
+      } @if (jobForm.get('dateApplied')?.errors?.['futureDate']) { Date cannot
+      be in the future }
+    </small>
+    }
+  </div>
+
+  <!-- STATUS -->
+  <div class="form-group">
+    <label for="status">Status</label>
+    <select
+      id="status"
+      formControlName="status"
+      aria-required="true"
+      [attr.aria-invalid]="
+        jobForm.get('status')?.touched && jobForm.get('status')?.invalid
+      "
+    >
+      <option value="">Select status</option>
+      <option value="applied">Applied</option>
+      <option value="interviewing">Interviewing</option>
+      <option value="offer">Offer</option>
+      <option value="rejected">Rejected</option>
+    </select>
+
+    @if (jobForm.get('status')?.touched && jobForm.get('status')?.invalid) {
+    <div class="error" role="alert">
+      <small>Status is required.</small>
+    </div>
+    }
+  </div>
+
+  <!-- SUBMIT -->
+  <button type="submit" [disabled]="jobForm.invalid">Save Job</button>
+</form>
