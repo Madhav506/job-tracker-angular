@@ -1,0 +1,14 @@
+import { createAction, props } from '@ngrx/store';
+import { Job } from '../models/jobs.model';
+
+export const addJob = createAction('[Jobs] Add Job', props<{ job: Job }>());
+
+export const updateJob = createAction(
+  '[Jobs] Update Job',
+  props<{ job: Job }>()
+);
+
+export const deleteJob = createAction(
+  '[Jobs] Delete Job',
+  props<{ id: number }>()
+);

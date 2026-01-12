@@ -6,7 +6,7 @@
   ></app-job-form>
   <hr />
   <app-jobs-list
-    [jobs]="jobs"
+    [jobs]="(jobs$ | async) ?? []"
     (edit)="editJob($event)"
     (delete)="deleteJob($event)"
   >

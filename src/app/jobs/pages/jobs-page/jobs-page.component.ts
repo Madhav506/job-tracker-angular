@@ -1,38 +1,34 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AsyncPipe } from '@angular/common';
 import { Job } from '../../models/jobs.model';
 import { JobsListComponent } from '../../components/jobs-list/jobs-list.component';
 import { JobFormComponent } from '../../components/job-form/job-form.component';
-import { JobsLocalService } from '../../services/jobs-local.service';
+import * as JobsSelectors from '../../store/jobs.selectors';
+import * as JobsActions from '../../store/jobs.actions';
 
 @Component({
   selector: 'app-jobs-page',
   standalone: true,
-  imports: [JobsListComponent, JobFormComponent],
+  imports: [JobsListComponent, JobFormComponent, AsyncPipe],
   templateUrl: './jobs-page.component.html',
   styleUrl: './jobs-page.component.scss',
 })
 export class JobsPageComponent {
-  jobs: Job[] = [];
+  // jobs: Job[] = [];
+  jobs$ = this.store.select(JobsSelectors.selectAllJobs);
   jobBeingEdited?: Job;
 
-  constructor(private jobsService: JobsLocalService) {
-    this.jobs = this.jobsService.getJobs();
-  }
-  addJob(job: Job) {
-    this.jobsService.addJob(job);
-    // this.jobs = [...this.jobs, job];
-    this.jobs = this.jobsService.getJobs();
-  }
+  constructor(private store: Store) {}
 
   saveJob(job: Job) {
     if (this.jobBeingEdited) {
-      this.jobsService.updateJob(job);
+      this.store.dispatch(JobsActions.updateJob({ job }));
     } else {
-      this.jobsService.addJob(job);
+      this.store.dispatch(JobsActions.addJob({ job }));
     }
 
     this.jobBeingEdited = undefined;
-    this.jobs = this.jobsService.getJobs();
   }
 
   editJob(job: Job) {
@@ -40,7 +36,6 @@ export class JobsPageComponent {
   }
   // called when child emits delete event
   deleteJob(id: number) {
-    this.jobsService.deleteJob(id);
-    this.jobs = this.jobsService.getJobs();
+    this.store.dispatch(JobsActions.deleteJob({ id }));
   }
 }
