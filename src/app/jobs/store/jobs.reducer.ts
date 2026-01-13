@@ -4,7 +4,10 @@ import * as JobsActions from './jobs.actions';
 
 export const jobsReducer = createReducer(
   initialJobsState,
-
+  on(JobsActions.loadJobs, (state) => ({
+    ...state,
+    loading: true,
+  })),
   on(JobsActions.addJob, (state, { job }) => ({
     ...state,
     jobs: [...state.jobs, job],

@@ -1,6 +1,8 @@
 import { createAction, props } from '@ngrx/store';
 import { Job } from '../models/jobs.model';
 
+export const loadJobs = createAction('[Jobs] Load Jobs');
+
 export const addJob = createAction('[Jobs] Add Job', props<{ job: Job }>());
 
 export const updateJob = createAction(

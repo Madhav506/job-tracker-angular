@@ -47,8 +47,7 @@ export class JobFormComponent {
     ],
     dateApplied: [
       '',
-      Validators.required,
-      this.noFutureDateValidator(), // custom validator
+      [Validators.required, this.noFutureDateValidator()], // custom validator
     ],
     status: ['applied', Validators.required],
   });
