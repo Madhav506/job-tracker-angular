@@ -6,8 +6,9 @@ export interface JobsState {
   error: string | null;
 }
 
-export const initialJobsState: JobsState = {
+/** export const initialJobsState: JobsState = {
   jobs: [],
   loading: false,
   error: null,
 };
+*/

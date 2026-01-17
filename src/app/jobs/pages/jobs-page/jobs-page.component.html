@@ -5,10 +5,14 @@
     (jobSaved)="saveJob($event)"
   ></app-job-form>
   <hr />
+  @if (loading$ | async) {
+  <div class="loading">Loading jobs...</div>
+  } @else {
   <app-jobs-list
     [jobs]="(jobs$ | async) ?? []"
     (edit)="editJob($event)"
     (delete)="deleteJob($event)"
   >
   </app-jobs-list>
+  }
 </div>

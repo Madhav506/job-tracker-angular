@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AsyncPipe } from '@angular/common';
 import { Job } from '../../models/jobs.model';
@@ -14,12 +14,17 @@ import * as JobsActions from '../../store/jobs.actions';
   templateUrl: './jobs-page.component.html',
   styleUrl: './jobs-page.component.scss',
 })
-export class JobsPageComponent {
+export class JobsPageComponent implements OnInit {
   // jobs: Job[] = [];
   jobs$ = this.store.select(JobsSelectors.selectAllJobs);
+  loading$ = this.store.select(JobsSelectors.selectJobsLoading);
   jobBeingEdited?: Job;
 
   constructor(private store: Store) {}
+
+  ngOnInit() {
+    this.store.dispatch(JobsActions.loadJobs());
+  }
 
   saveJob(job: Job) {
     if (this.jobBeingEdited) {
